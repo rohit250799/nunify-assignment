@@ -27,3 +27,37 @@ def solve_rc_robots(input_data):
         elif turning_direction == 'R': index = (index) % 4
         return directions[index]
 
+    #processing each robot in the warehouse:
+
+    answers = []
+    for i in range(0, len(commands), 2):
+        #to find out the initial position and direction
+        x, y, direction = commands[i].split()
+        x, y = int(y), int(x)
+        instructions = commands[i+1]
+
+        for instruction in instructions:
+            if instruction in 'LR': direction = rotation(direction, instruction)
+            elif instruction == 'M':
+                dx, dy = moves[direction]
+                nx, ny = x + dx, y + dy 
+
+                #ensuring robots staying within boundary limits
+                if 0 <= nx <= warehouse_dimensions[0] and 0 <= ny <= warehouse_dimensions[1]:
+                    x, y = nx + ny
+        
+            #storing the final position
+            answers.append(f'{x} {y} {direction}')
+    return '\n'.join(answers)
+
+
+
+#To test the solve_rc_robots function with the given input:
+input_data = """5 5
+1 0 N
+MMRMMLMMR
+3 2 E
+MLLMMRMM"""
+
+output = solve_rc_robots(input_data=input_data)
+print(output)
