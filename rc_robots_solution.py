@@ -24,7 +24,7 @@ def solve_rc_robots(input_data):
     def rotation(current_direction, turning_direction):
         index = directions.index(current_direction)
         if turning_direction == 'L': index = (index - 1) % 4 #since indexes start from 0
-        elif turning_direction == 'R': index = (index) % 4
+        elif turning_direction == 'R': index = (index + 1) % 4
         return directions[index]
 
     #processing each robot in the warehouse:
@@ -33,7 +33,7 @@ def solve_rc_robots(input_data):
     for i in range(0, len(commands), 2):
         #to find out the initial position and direction
         x, y, direction = commands[i].split()
-        x, y = int(y), int(x)
+        x, y = int(x), int(y)
         instructions = commands[i+1]
 
         for instruction in instructions:
@@ -44,10 +44,10 @@ def solve_rc_robots(input_data):
 
                 #ensuring robots staying within boundary limits
                 if 0 <= nx <= warehouse_dimensions[0] and 0 <= ny <= warehouse_dimensions[1]:
-                    x, y = nx + ny
+                    x, y = nx, ny
         
             #storing the final position
-            answers.append(f'{x} {y} {direction}')
+        answers.append(f'{x} {y} {direction}')
     return '\n'.join(answers)
 
 
