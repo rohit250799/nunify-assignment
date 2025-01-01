@@ -52,6 +52,7 @@ def solve_rc_robots(input_data):
 
 
 
+
 #To test the solve_rc_robots function with the given input:
 input_data = """5 5
 1 0 N
@@ -59,5 +60,10 @@ MMRMMLMMR
 3 2 E
 MLLMMRMM"""
 
-output = solve_rc_robots(input_data=input_data)
-print(output)
+def main():
+    output = solve_rc_robots(input_data=input_data)
+    print(output)
+    return
+
+if __name__ == "__main__":
+    main()
